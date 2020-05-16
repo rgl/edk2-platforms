@@ -28,7 +28,7 @@
 
 #include "PlatformBm.h"
 
-#define BOOT_PROMPT L"ESC (setup), F1 (shell), ENTER (boot)"
+#define BOOT_PROMPT L"Booting"
 
 #define DP_NODE_LEN(Type) { (UINT8)sizeof (Type), (UINT8)(sizeof (Type) >> 8) }
 
@@ -450,6 +450,8 @@ PlatformRegisterOptionsAndKeys (
   VOID
   )
 {
+  return;
+
   EFI_STATUS                   Status;
   EFI_INPUT_KEY                Enter;
   EFI_INPUT_KEY                F1;
@@ -723,6 +725,13 @@ PlatformBootManagerUnableToBoot (
   VOID
   )
 {
+  AsciiPrint (
+      "%a: No bootable option succeeded, rebooting...\n",
+      gEfiCallerBaseName);
+  gBS->Stall (5 * (UINTN)1000000);
+  gRT->ResetSystem (EfiResetWarm, EFI_SUCCESS, 0, NULL);
+  return;
+
   EFI_STATUS                   Status;
   EFI_INPUT_KEY                Key;
   EFI_BOOT_MANAGER_LOAD_OPTION BootManagerMenu;

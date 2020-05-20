@@ -482,6 +482,11 @@
   gRaspberryPiTokenSpaceGuid.PcdDisplayEnableSShot|L"DisplayEnableSShot"|gConfigDxeFormSetGuid|0x0|1
 
   #
+  # Smbios.
+  #
+  gRaspberryPiTokenSpaceGuid.PcdSmbiosEnclosureAssetTag|"SmbiosEnclosureAssetTag"|gConfigDxeFormSetGuid|0x0|""
+
+  #
   # Supporting > 3GB of memory.
   #
   gRaspberryPiTokenSpaceGuid.PcdRamMoreThan3GB|L"RamMoreThan3GB"|gConfigDxeFormSetGuid|0x0|0

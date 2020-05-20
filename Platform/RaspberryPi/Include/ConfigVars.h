@@ -64,6 +64,10 @@ typedef struct {
 } CHIPSET_CUSTOM_CPU_CLOCK_VARSTORE_DATA;
 
 typedef struct {
+  CHAR16 AssetTag[128];
+} SMBIOS_ENCLOSURE_ASSET_TAG_VARSTORE_DATA;
+
+typedef struct {
   /*
    * Always set by ConfigDxe prior to HII init to reflect
    * platform capability.

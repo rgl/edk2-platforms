@@ -85,6 +85,7 @@
   gRaspberryPiTokenSpaceGuid.PcdDisplayEnableScaledVModes
   gRaspberryPiTokenSpaceGuid.PcdDisplayEnableSShot
   gRaspberryPiTokenSpaceGuid.PcdSystemTableMode
+  gRaspberryPiTokenSpaceGuid.PcdSmbiosEnclosureAssetTag
   gRaspberryPiTokenSpaceGuid.PcdRamMoreThan3GB
   gRaspberryPiTokenSpaceGuid.PcdRamLimitTo3GB
 

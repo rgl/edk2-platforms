@@ -188,6 +188,7 @@ SetupVariables (
   UINTN Size;
   UINT8 Var8;
   UINT32 Var32;
+  // CHAR8 VarAsciiString[128];
   EFI_STATUS Status;
 
   /*
@@ -202,6 +203,14 @@ SetupVariables (
   if (EFI_ERROR (Status)) {
     PcdSet32 (PcdCpuClock, PcdGet32 (PcdCpuClock));
   }
+
+  // Size = sizeof (VarAsciiString);
+  // Status = gRT->GetVariable(L"SmbiosEnclosureAssetTag",
+  //                           &gConfigDxeFormSetGuid,
+  //                           NULL, &Size, &VarAsciiString);
+  // if (EFI_ERROR (Status)) {
+  //   PcdSetPtr (PcdSmbiosEnclosureAssetTag, PcdGetPtr (PcdSmbiosEnclosureAssetTag));
+  // }
 
   Size = sizeof (UINT32);
   Status = gRT->GetVariable(L"CustomCpuClock",

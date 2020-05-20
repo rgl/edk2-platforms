@@ -40,6 +40,7 @@
 #include <Library/MemoryAllocationLib.h>
 #include <Library/TimeBaseLib.h>
 #include <Library/UefiBootServicesTableLib.h>
+#include <Library/UefiRuntimeServicesTableLib.h>
 #include <Library/PrintLib.h>
 
 #define SMB_IS_DIGIT(c)  (((c) >= '0') && ((c) <= '9'))
@@ -190,13 +191,14 @@ CHAR8 *mBoardInfoType2Strings[] = {
 /***********************************************************************
         SMBIOS data definition  TYPE3  Enclosure Information
 ************************************************************************/
+CHAR8 mEnclosureInfoAssetTag[128];
 SMBIOS_TABLE_TYPE3 mEnclosureInfoType3 = {
   { EFI_SMBIOS_TYPE_SYSTEM_ENCLOSURE, sizeof (SMBIOS_TABLE_TYPE3), 0 },
   1,                        // Manufacturer String
   MiscChassisEmbeddedPc,    // Type;
   2,                        // Version String
   3,                        // SerialNumber String
-  0,                        // AssetTag String
+  4,                        // AssetTag String
   ChassisStateSafe,         // BootupState;
   ChassisStateSafe,         // PowerSupplyState;
   ChassisStateSafe,         // ThermalState;
@@ -212,6 +214,7 @@ CHAR8 *mEnclosureInfoType3Strings[] = {
   mSysInfoManufName,
   mSysInfoProductName,
   mSysInfoSerial,
+  mEnclosureInfoAssetTag,
   NULL
 };
 
@@ -766,11 +769,38 @@ BoardInfoUpdateSmbiosType2 (
 /***********************************************************************
         SMBIOS data update  TYPE3  Enclosure Information
 ************************************************************************/
+// // 7EEE1209-AE99-483C-9768-1224219FC0DA
+// #define RPI_SMBIOS_GUID \
+//     { \
+//       0x7eee1209, 0xae99, 0x483c, { 0x97, 0x68, 0x12, 0x24, 0x21, 0x9f, 0xc0, 0xda } \
+//     }
+// GUID gRpiSmbiosGuid = RPI_SMBIOS_GUID; // TODO or this should use an existing GUID?
 VOID
 EnclosureInfoUpdateSmbiosType3 (
   VOID
   )
 {
+  // UINTN DataSize;
+  // UINT32 Attributes;
+  // EFI_STATUS Status;
+
+  // // NB you can set this variable from the efi shell with:
+  // //      setvar AssetTag -guid 7EEE1209-AE99-483C-9768-1224219FC0DA -bs -rt -nv =S"Hello World" =0x00
+  // DataSize = sizeof (mEnclosureInfoAssetTag);
+  // Attributes = EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS;
+  // Status = gRT->GetVariable (
+  //     L"AssetTag", // TODO or EnclosureAssetTag?
+  //     &gRpiSmbiosGuid,
+  //     &Attributes,
+  //     &DataSize,
+  //     &mEnclosureInfoAssetTag
+  //   );
+  // if (EFI_ERROR (Status)) {
+  //   mEnclosureInfoAssetTag[0] = 0;
+  //   AsciiStrCpyS (mEnclosureInfoAssetTag, sizeof (mEnclosureInfoAssetTag), "XXX"); // TODO remove after test.
+  // }
+  // // TODO always add a trailing NUL to the string?
+
   LogSmbiosData ((EFI_SMBIOS_TABLE_HEADER*)&mEnclosureInfoType3, mEnclosureInfoType3Strings, NULL);
 }
 

@@ -34,6 +34,11 @@ formset
       name  = CustomCpuClock,
       guid  = CONFIGDXE_FORM_SET_GUID;
 
+    efivarstore SMBIOS_ENCLOSURE_ASSET_TAG_VARSTORE_DATA,
+      attribute = EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_NON_VOLATILE,
+      name  = SmbiosEnclosureAssetTag,
+      guid  = CONFIGDXE_FORM_SET_GUID;
+
     efivarstore ADVANCED_RAM_MORE_THAN_3GB_VARSTORE_DATA,
       attribute = EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_NON_VOLATILE,
       name  = RamMoreThan3GB,
@@ -153,6 +158,14 @@ formset
     form formid = 0x1006,
         title  = STRING_TOKEN(STR_ADVANCED_FORM_TITLE);
         subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+        string varid = SmbiosEnclosureAssetTag.AssetTag,
+            prompt  = STRING_TOKEN(STR_SMBIOS_ENCLOSURE_ASSET_TAG_PROMPT),
+            help    = STRING_TOKEN(STR_NULL_STRING),
+            flags   = INTERACTIVE,
+            minsize = 0,
+            maxsize = 128,
+        endstring;
 
         grayoutif ideqval RamMoreThan3GB.Supported == 0;
           oneof varid = RamLimitTo3GB.Enabled,

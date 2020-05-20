@@ -52,5 +52,6 @@
   gArmTokenSpaceGuid.PcdSystemMemorySize
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVendor
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString
+  gRaspberryPiTokenSpaceGuid.PcdSmbiosEnclosureAssetTag
   gRaspberryPiTokenSpaceGuid.PcdRamMoreThan3GB
   gRaspberryPiTokenSpaceGuid.PcdRamLimitTo3GB

@@ -31,6 +31,12 @@
 #string STR_CHIPSET_CUSTOM_CPU_CLOCK_HELP   #language en-US "Manually set the CPU Speed\n\nWarning: Overclocking can make the system unbootable!"
 
 /*
+ * Smbios configuration.
+ */
+
+#string STR_SMBIOS_ENCLOSURE_ASSET_TAG_PROMPT   #language en-US "Smbios Enclosure Asset Tag"
+
+/*
  * Advanced configuration.
  */
 
